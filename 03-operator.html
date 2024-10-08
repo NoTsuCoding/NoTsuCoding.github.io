@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>03-operator</title>
+        <script>
+            let num1 = 7,
+                num2 = 8,
+                num3 = 9;
+        </script>
+    </head>
+    <body>
+        <p id="output-1"></p>
+        <p id="output-2"></p>
+        <p id="output-3"></p>
+        <p id="output-4">
+            <script>
+                document.write('hello');
+            </script>
+        </p>
+        <p id="output-5"></p>
+        <p id="output-6"></p>
+        <p id="output-7"></p>
+        <p id="output-8"></p>
+        <script>
+            const output1El = document.getElementById('output-1'),
+                output2El = document.getElementById('output-2'),
+                output3El = document.getElementById('output-3'),
+                output5El = document.getElementById('output-5'),
+                output6El = document.getElementById('output-6'),
+                output7El = document.getElementById('output-7'),
+                output8El = document.getElementById('output-8');
+
+            output1El.innerHTML = num1;
+            output2El.innerHTML = num2;
+            output3El.innerHTML = num3;
+            output5El.innerHTML = num1 + num2;
+            output6El.innerHTML = ++num3;
+            output7El.innerHTML = num3 == num2;
+            output8El.innerHTML = num3 = ++num2;
+        </script>
+    </body>
+</html>

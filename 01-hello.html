@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>01-Hello</title>
+    </head>
+    <body>
+        <h1>Hello</h1>
+        <h2 id="hello-world-container"></h2>
+    </body>
+
+    <!-- JS -->
+    <script>
+        document.write('<h2>Hello, JS</h2>');
+
+        console.log('Hello world, but in this');
+
+        const helloWorldContainer = document.getElementById(
+            'hello-world-container'
+        );
+        helloWorldContainer.innerHTML = 'JS told me to say Hello world';
+
+        alert('HELLO WORLD!!!!');
+    </script>
+</html>
