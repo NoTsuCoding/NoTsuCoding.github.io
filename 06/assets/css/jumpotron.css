@@ -1,0 +1,22 @@
+.jumpotron {
+    position: relative;
+    overflow: hidden;
+    height: 256px;
+
+    video {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        object-position: bottom;
+        object-fit: cover;
+        flex-grow: 1;
+    }
+
+    .jumpotron-header {
+        z-index: 2;
+        position: relative;
+    }
+}

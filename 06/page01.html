@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            // Load Template
+            $(function () {
+                $('head').load('/06/partials/_head.html');
+                $('body').prepend(
+                    $("<div id='header'>").load('/06/components/Header.html')
+                );
+                $('body').prepend(
+                    $("<div id='footer'>").load('/06/partial/_footer.html')
+                );
+            });
+        </script>
+    </head>
+
+    <body>
+        <main
+            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
+        >
+            <!-- * Start Card -->
+            <div class="tw-w-6/12 bg-white rounded border">
+                <div class="p-4">
+                    <form id="formSignIn">
+                        <p class="font-bold text-2xl mb-5 w-full text-center">
+                            Login to Your Account
+                        </p>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="inputUsername"
+                                placeholder="Username"
+                                required
+                            />
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-5">
+                            <label class="form-label">Password</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="inputPassword"
+                                required
+                            />
+                        </div>
+
+                        <div class="flex gap-x-2 border">
+                            <button
+                                type="submit"
+                                class="btn btn-success w-full"
+                            >
+                                Sign in
+                            </button>
+                            <button type="reset" class="btn btn-danger w-full">
+                                Clear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- * End Card -->
+
+            <!-- * Start Signin -->
+            <script>
+                const users = [{ username: 'notsu', password: 'admin1234' }];
+
+                const formSignIn = document.getElementById('formSignIn');
+
+                formSignIn.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const username =
+                        document.getElementById('inputUsername').value;
+                    const password =
+                        document.getElementById('inputPassword').value;
+
+                    const filteredUser = users.find(
+                        (user) => user.username === username
+                    );
+
+                    if (!filteredUser)
+                        return alert('Username or Password is incorrected.');
+
+                    if (!filteredUser.password === password)
+                        return alert('Username or Password is incorrected.');
+
+                    alert('Login Successfull');
+                });
+            </script>
+            <!-- * End Signin -->
+        </main>
+    </body>
+</html>

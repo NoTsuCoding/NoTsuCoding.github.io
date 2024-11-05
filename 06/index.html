@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            // Load Template
+            $(function () {
+                $('head').load('/06/partials/_head.html');
+                $('body').prepend(
+                    $("<div id='header'>").load('/06/components/Header.html')
+                );
+                $('body').append(
+                    $("<div id='footer'>").load('/06/partial/_footer.html')
+                );
+            });
+        </script>
+    </head>
+
+    <body>
+        <main
+            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
+        >
+            <!-- Card -->
+            <div
+                class="card border-info"
+                style="width: 30rem; max-width: 30rem"
+            >
+                <div class="card-header bg-transparent border-info">
+                    Triangle Area Calculator
+                </div>
+                <div class="card-body text-info">
+                    <!-- triangle data form -->
+                    <form id="formTriangleData">
+                        <!-- Height -->
+                        <div class="mb-3">
+                            <label class="form-label">Height</label>
+                            <input
+                                type="number"
+                                class="form-control std_name"
+                                id="inputHeight"
+                                name="inputHeight"
+                                step="any"
+                                required
+                            />
+                        </div>
+
+                        <!-- Base -->
+                        <div class="mb-3">
+                            <label class="form-label">Base</label>
+                            <input
+                                type="number"
+                                class="form-control std_name"
+                                id="inputBase"
+                                name="inputBase"
+                                step="any"
+                                required
+                            />
+                        </div>
+
+                        <!-- Area -->
+                        <div class="mb-3">
+                            <label class="form-label">Area</label>
+                            <input
+                                type="number"
+                                class="form-control std_name"
+                                id="outputArea"
+                                step="any"
+                                readonly
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-transparent border-info">
+                    <button
+                        type="submit"
+                        form="formTriangleData"
+                        id="btnSubmit"
+                        class="btn btn-primary"
+                    >
+                        Submit
+                    </button>
+                    <button
+                        type="reset"
+                        form="formTriangleData"
+                        id="btnReset"
+                        class="btn btn-outline-secondary"
+                    >
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calculate -->
+            <script>
+                const formTriangleData =
+                    document.getElementById('formTriangleData');
+
+                formTriangleData.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const inputBase = document.getElementById('inputBase');
+                    const inputHeight = document.getElementById('inputHeight');
+                    const outputArea = document.getElementById('outputArea');
+
+                    const height = Number(inputBase.value);
+                    const base = Number(inputHeight.value);
+                    const area = 0.5 * height * base;
+
+                    outputArea.value = area;
+                });
+            </script>
+        </main>
+    </body>
+</html>
