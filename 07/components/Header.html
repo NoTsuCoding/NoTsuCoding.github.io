@@ -1,0 +1,198 @@
+<!-- Jumpotron -->
+<div class="p-5 jumpotron" style="background-color: #ffba49">
+    <video autoplay loop muted class="size-1">
+        <source
+            src="https://cdn.pixabay.com/video/2022/07/12/123872-729413470_large.mp4"
+            type="video/mp4"
+        />
+    </video>
+
+    <div class="jumpotron-header">
+        <p class="fs-1 fw-bold">Patsakorn Thiankhao</p>
+        <p class="fw-semibold fs-3">Rayong technical college</p>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav
+    class="flex flex-row p-2 items-center gap-x-5"
+    style="background-color: #20a39e"
+>
+    <a class="font-semibold text-xl" href="#">Navbar</a>
+    <ul class="flex me-auto items-stretch gap-x-3">
+        <!-- Home -->
+        <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+        </li>
+        <!-- Page 1 -->
+        <li class="nav-item">
+            <a class="nav-link" href="page01.html">Page 1</a>
+        </li>
+
+        <!-- Page 2 -->
+        <li class="nav-item">
+            <a class="nav-link" href="page02.html">Page 2</a>
+        </li>
+    </ul>
+    <a id="login-info" class="text-white"></a>
+    <div class="flex gap-x-2">
+        <!-- Sign In -->
+        <button
+            id="sign-in-btn"
+            class="btn btn-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#modalLogin"
+        >
+            Sign In
+        </button>
+
+        <!-- Sign Out -->
+        <button id="sign-out-btn" class="btn btn-danger">Sign Out</button>
+    </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Login to Your Account.</h1>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="formSignIn">
+                    <!-- Username -->
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="inputUsername"
+                            placeholder="admin"
+                            required
+                        />
+                        <label>Username</label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-floating">
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="inputPassword"
+                            placeholder="Password"
+                            required
+                        />
+                        <label>Password</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="reset"
+                    class="btn btn-secondary"
+                    form="formSignIn"
+                    data-bs-dismiss="modal"
+                >
+                    close
+                </button>
+                <button type="submit" class="btn btn-primary" form="formSignIn">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Pages
+        const protectPages = ['/07/page02.html'];
+
+        // Get local storage data.
+        const localUsername = localStorage.getItem('username') || 'foo';
+        const localPassword = localStorage.getItem('password') || 'bar';
+
+        //  Check are local storage data existed.
+        if (!localUsername || !localPassword) {
+            alert(
+                'Please set username/password in local storage. or use foo/bar as username/password.'
+            );
+        }
+
+        // Assign element
+        const formSignIn = $('#formSignIn');
+        const modalLogin = $('#modalLogin');
+        const loginInfo = $('#login-info');
+        const signInBtn = $('#sign-in-btn');
+        const signOutBtn = $('#sign-out-btn');
+
+        // Initial functions
+        checkSession();
+
+        // On form submit
+        formSignIn.submit(function (e) {
+            e.preventDefault();
+
+            const username = $('#inputUsername').val();
+            const password = $('#inputPassword').val();
+
+            if (!signIn(username, password)) return alert('Login Fail');
+
+            modalLogin.modal('hide');
+            alert('Login Successful');
+            return;
+        });
+
+        // On Sign out button click
+        signOutBtn.click(function (e) {
+            e.preventDefault();
+            signOut();
+        });
+
+        // Sign in by compare input with local storage
+        function signIn(username, password) {
+            if (localUsername !== username || localPassword !== password)
+                return false;
+
+            sessionStorage.setItem('username', username);
+            checkSession();
+
+            return true;
+        }
+
+        // Sign out by remove username item.
+        function signOut() {
+            sessionStorage.removeItem('username');
+            checkSession();
+        }
+
+        // Check if user alreay signed in.
+        function checkSession() {
+            const sessionUsername = sessionStorage.getItem('username');
+
+            const currentPage = location.pathname;
+
+            if (!sessionUsername) {
+                loginInfo.html('');
+                signInBtn.show();
+                signOutBtn.hide();
+
+                if (!protectPages.includes(currentPage)) return;
+
+                alert('Please sign in before access to this page.');
+                location.href = './';
+
+                return;
+            }
+
+            loginInfo.html(`Login as ${sessionUsername}`);
+            signInBtn.hide();
+            signOutBtn.show();
+        }
+    });
+</script>
