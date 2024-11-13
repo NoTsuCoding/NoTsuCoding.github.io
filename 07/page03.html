@@ -11,9 +11,9 @@
         <script>
             // Load Template
             $(function () {
-                $('head').load('/07/partials/_head.html');
+                $('head').load('/07/partials/head.html');
                 $('body').prepend($("<div id='header'>").load('/07/components/Header.html'));
-                $('body').append($("<div id='footer'>").load('/07/partials/_footer.html'));
+                $('body').append($("<div id='footer'>").load('/07/partials/footer.html'));
             });
         </script>
     </head>
@@ -89,7 +89,10 @@
                 $(document).ready(function () {
                     // When user want to add new student
                     $('#add-student-btn').click(function (e) {
+                        // Disable this button
                         $(this).prop('disabled', true);
+
+                        // Disable revelant button
                         document.querySelectorAll('.edit-btn,.delete-btn').forEach((editOrDelBtn) => {
                             editOrDelBtn.disabled = true;
                         });

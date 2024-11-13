@@ -11,21 +11,15 @@
         <script>
             // Load Template
             $(function () {
-                $('head').load('/06/partials/_head.html');
-                $('body').prepend(
-                    $("<div id='header'>").load('/06/components/Header.html')
-                );
-                $('body').append(
-                    $("<div id='footer'>").load('/06/partials/_footer.html')
-                );
+                $('head').load('/06/partials/head.html');
+                $('body').prepend($("<div id='header'>").load('/06/components/Header.html'));
+                $('body').append($("<div id='footer'>").load('/06/partials/footer.html'));
             });
         </script>
     </head>
 
     <body>
-        <main
-            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
-        >
+        <main class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5">
             <!-- Modal -->
             <div
                 class="modal fade"
@@ -37,39 +31,19 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                Modal title
-                            </h1>
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            ></button>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">...</div>
                         <div class="modal-footer">
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                            >
-                                Close
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                                Save changes
-                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-            >
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
         </main>

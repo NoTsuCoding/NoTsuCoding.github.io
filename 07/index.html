@@ -11,21 +11,15 @@
         <script>
             // Load Template
             $(function () {
-                $('head').load('/07/partials/_head.html');
-                $('body').prepend(
-                    $("<div id='header'>").load('/07/components/Header.html')
-                );
-                $('body').append(
-                    $("<div id='footer'>").load('/07/partials/_footer.html')
-                );
+                $('head').load('/07/partials/head.html');
+                $('body').prepend($("<div id='header'>").load('/07/components/Header.html'));
+                $('body').append($("<div id='footer'>").load('/07/partials/footer.html'));
             });
         </script>
     </head>
 
     <body>
-        <main
-            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
-        >
+        <main class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5">
             <p class="text-2xl font-bold text-white">Home</p>
         </main>
     </body>

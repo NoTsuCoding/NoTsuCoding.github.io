@@ -11,21 +11,15 @@
         <script>
             // Load Template
             $(function () {
-                $('head').load('/07/partials/_head.html');
-                $('body').prepend(
-                    $("<div id='header'>").load('/07/components/Header.html')
-                );
-                $('body').append(
-                    $("<div id='footer'>").load('/07/partials/_footer.html')
-                );
+                $('head').load('/07/partials/head.html');
+                $('body').prepend($("<div id='header'>").load('/07/components/Header.html'));
+                $('body').append($("<div id='footer'>").load('/07/partials/footer.html'));
             });
         </script>
     </head>
 
     <body>
-        <main
-            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
-        >
+        <main class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5">
             <!-- Card -->
             <div class="card" style="width: 50rem">
                 <img
@@ -39,9 +33,7 @@
                     alt="..."
                 /> -->
                 <div class="card-body">
-                    <h5 class="card-title text-xl font-semibold">
-                        Create New Student Form
-                    </h5>
+                    <h5 class="card-title text-xl font-semibold">Create New Student Form</h5>
                     <form action="" id="create-student-form" class="mb-5">
                         <!-- Student ID -->
                         <div class="form-floating mb-3">
@@ -59,29 +51,15 @@
 
                         <!-- Fullname -->
                         <div class="form-floating mb-3">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="fullNameInput"
-                                placeholder="text"
-                                required
-                            />
+                            <input type="text" class="form-control" id="fullNameInput" placeholder="text" required />
                             <label>Full name</label>
                         </div>
 
                         <!-- Department -->
                         <div class="form-floating mb-3">
-                            <select
-                                class="form-select"
-                                id="departmentSelect"
-                                required
-                            >
-                                <option selected disabled>
-                                    Select Department
-                                </option>
-                                <option value="Information Technology">
-                                    Information Technology
-                                </option>
+                            <select class="form-select" id="departmentSelect" required>
+                                <option selected disabled>Select Department</option>
+                                <option value="Information Technology">Information Technology</option>
                                 <option value="Marketing">Marketing</option>
                                 <option value="Accounting">Accounting</option>
                             </select>
@@ -89,18 +67,8 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button
-                                type="submit"
-                                class="btn btn-primary flex-1"
-                            >
-                                Submit
-                            </button>
-                            <button
-                                type="reset"
-                                class="btn btn-outline-primary flex-1"
-                            >
-                                Reset
-                            </button>
+                            <button type="submit" class="btn btn-primary flex-1">Submit</button>
+                            <button type="reset" class="btn btn-outline-primary flex-1">Reset</button>
                         </div>
                     </form>
 
@@ -125,9 +93,7 @@
 
             <script>
                 $(document).ready(function () {
-                    const students = JSON.parse(
-                        localStorage.getItem('students') ?? '[]'
-                    ).sort((a, b) => a.id - b.id);
+                    const students = JSON.parse(localStorage.getItem('students') ?? '[]').sort((a, b) => a.id - b.id);
 
                     setStudentsIntoTable();
 
@@ -165,10 +131,7 @@
                         students.push(student);
                         setStudentsIntoTable();
 
-                        localStorage.setItem(
-                            'students',
-                            JSON.stringify(students)
-                        );
+                        localStorage.setItem('students', JSON.stringify(students));
 
                         clearStudentForm();
                     });

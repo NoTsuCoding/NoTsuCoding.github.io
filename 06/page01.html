@@ -11,28 +11,20 @@
         <script>
             // Load Template
             $(function () {
-                $('head').load('/06/partials/_head.html');
-                $('body').prepend(
-                    $("<div id='header'>").load('/06/components/Header.html')
-                );
-                $('body').prepend(
-                    $("<div id='footer'>").load('/06/partial/_footer.html')
-                );
+                $('head').load('/06/partials/head.html');
+                $('body').prepend($("<div id='header'>").load('/06/components/Header.html'));
+                $('body').prepend($("<div id='footer'>").load('/06/partial/footer.html'));
             });
         </script>
     </head>
 
     <body>
-        <main
-            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
-        >
+        <main class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5">
             <!-- * Start Card -->
             <div class="tw-w-6/12 bg-white rounded border">
                 <div class="p-4">
                     <form id="formSignIn">
-                        <p class="font-bold text-2xl mb-5 w-full text-center">
-                            Login to Your Account
-                        </p>
+                        <p class="font-bold text-2xl mb-5 w-full text-center">Login to Your Account</p>
 
                         <!-- Email -->
                         <div class="mb-3">
@@ -49,24 +41,12 @@
                         <!-- Password -->
                         <div class="mb-5">
                             <label class="form-label">Password</label>
-                            <input
-                                type="password"
-                                class="form-control"
-                                id="inputPassword"
-                                required
-                            />
+                            <input type="password" class="form-control" id="inputPassword" required />
                         </div>
 
                         <div class="flex gap-x-2 border">
-                            <button
-                                type="submit"
-                                class="btn btn-success w-full"
-                            >
-                                Sign in
-                            </button>
-                            <button type="reset" class="btn btn-danger w-full">
-                                Clear
-                            </button>
+                            <button type="submit" class="btn btn-success w-full">Sign in</button>
+                            <button type="reset" class="btn btn-danger w-full">Clear</button>
                         </div>
                     </form>
                 </div>
@@ -82,20 +62,14 @@
                 formSignIn.addEventListener('submit', (e) => {
                     e.preventDefault();
 
-                    const username =
-                        document.getElementById('inputUsername').value;
-                    const password =
-                        document.getElementById('inputPassword').value;
+                    const username = document.getElementById('inputUsername').value;
+                    const password = document.getElementById('inputPassword').value;
 
-                    const filteredUser = users.find(
-                        (user) => user.username === username
-                    );
+                    const filteredUser = users.find((user) => user.username === username);
 
-                    if (!filteredUser)
-                        return alert('Username or Password is incorrected.');
+                    if (!filteredUser) return alert('Username or Password is incorrected.');
 
-                    if (!filteredUser.password === password)
-                        return alert('Username or Password is incorrected.');
+                    if (!filteredUser.password === password) return alert('Username or Password is incorrected.');
 
                     alert('Login Successfull');
                 });

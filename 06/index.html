@@ -11,29 +11,18 @@
         <script>
             // Load Template
             $(function () {
-                $('head').load('/06/partials/_head.html');
-                $('body').prepend(
-                    $("<div id='header'>").load('/06/components/Header.html')
-                );
-                $('body').append(
-                    $("<div id='footer'>").load('/06/partial/_footer.html')
-                );
+                $('head').load('/06/partials/head.html');
+                $('body').prepend($("<div id='header'>").load('/06/components/Header.html'));
+                $('body').append($("<div id='footer'>").load('/06/partial/footer.html'));
             });
         </script>
     </head>
 
     <body>
-        <main
-            class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
-        >
+        <main class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5">
             <!-- Card -->
-            <div
-                class="card border-info"
-                style="width: 30rem; max-width: 30rem"
-            >
-                <div class="card-header bg-transparent border-info">
-                    Triangle Area Calculator
-                </div>
+            <div class="card border-info" style="width: 30rem; max-width: 30rem">
+                <div class="card-header bg-transparent border-info">Triangle Area Calculator</div>
                 <div class="card-body text-info">
                     <!-- triangle data form -->
                     <form id="formTriangleData">
@@ -66,31 +55,13 @@
                         <!-- Area -->
                         <div class="mb-3">
                             <label class="form-label">Area</label>
-                            <input
-                                type="number"
-                                class="form-control std_name"
-                                id="outputArea"
-                                step="any"
-                                readonly
-                            />
+                            <input type="number" class="form-control std_name" id="outputArea" step="any" readonly />
                         </div>
                     </form>
                 </div>
                 <div class="card-footer bg-transparent border-info">
-                    <button
-                        type="submit"
-                        form="formTriangleData"
-                        id="btnSubmit"
-                        class="btn btn-primary"
-                    >
-                        Submit
-                    </button>
-                    <button
-                        type="reset"
-                        form="formTriangleData"
-                        id="btnReset"
-                        class="btn btn-outline-secondary"
-                    >
+                    <button type="submit" form="formTriangleData" id="btnSubmit" class="btn btn-primary">Submit</button>
+                    <button type="reset" form="formTriangleData" id="btnReset" class="btn btn-outline-secondary">
                         Reset
                     </button>
                 </div>
@@ -98,8 +69,7 @@
 
             <!-- Calculate -->
             <script>
-                const formTriangleData =
-                    document.getElementById('formTriangleData');
+                const formTriangleData = document.getElementById('formTriangleData');
 
                 formTriangleData.addEventListener('submit', (e) => {
                     e.preventDefault();
