@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            // Load Template
+            $(function () {
+                $('head').load('/07/partials/_head.html');
+                $('body').prepend($("<div id='header'>").load('/07/components/Header.html'));
+                $('body').append($("<div id='footer'>").load('/07/partials/_footer.html'));
+            });
+        </script>
+    </head>
+
+    <body>
+        <main class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5">
+            <!-- Card -->
+            <div class="card" style="width: 80rem">
+                <img
+                    src="https://i.pinimg.com/736x/a5/35/8a/a5358a5f47f42bb135354a1266ac33c8.jpg"
+                    class="object-cover h-80 object-top"
+                    alt="..."
+                />
+                <div class="card-body">
+                    <h5 class="card-title text-xl font-semibold">Students</h5>
+
+                    <div class="flex justify-end mb-3">
+                        <button class="btn btn-success w-32" id="add-student-btn">Add student</button>
+                    </div>
+                    <form id="add-student-form">
+                        <table
+                            class="table table-success table-striped table-hover table-bordered w-full"
+                            id="students-table"
+                        >
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Student ID</th>
+                                    <th style="width: 50%">Full Name</th>
+                                    <th class="text-center">Department</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableData"></tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- End of Card -->
+
+            <script>
+                const students = JSON.parse(localStorage.getItem('students') ?? '[]').sort((a, b) => a.id - b.id);
+
+                const studentTBody = document.getElementById('students-table').getElementsByTagName('tbody')[0];
+                const addStudentForm = $('#add-student-form');
+
+                loadStudentDataTable();
+                function loadStudentDataTable() {
+                    studentTBody.innerHTML = '';
+
+                    for (const student of students) {
+                        const row = studentTBody.insertRow();
+                        const studentIdCell = row.insertCell();
+                        studentIdCell.innerHTML = student.id;
+                        studentIdCell.className = 'text-center';
+
+                        const studentFullNameCell = (row.insertCell().innerHTML = student.fullName);
+
+                        const studentDepartmentCell = row.insertCell();
+                        studentDepartmentCell.innerHTML = student.department;
+                        studentDepartmentCell.className = 'text-center';
+
+                        const studentActionmentCell = row.insertCell();
+                        studentActionmentCell.innerHTML = `
+                        <div class="flex gap-2">
+                            <button class="btn btn-warning flex-1 edit-btn">Edit</button>
+                            <button class="btn btn-danger flex-1 delete-btn">Delete</button>
+                        </div>
+                        `;
+                        studentDepartmentCell.className = 'text-center';
+                    }
+                }
+
+                $(document).ready(function () {
+                    // When user want to add new student
+                    $('#add-student-btn').click(function (e) {
+                        $(this).prop('disabled', true);
+                        document.querySelectorAll('.edit-btn,.delete-btn').forEach((editOrDelBtn) => {
+                            editOrDelBtn.disabled = true;
+                        });
+
+                        const row = studentTBody.insertRow();
+
+                        const studentIdCell = (row.insertCell().innerHTML = `
+                            <div class="form-floating">
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="studentIdInput"
+                                    min="1000"
+                                    max="9999"
+                                    placeholder=""
+                                    form="add-student-form"
+                                    required
+                                />
+                                <label>Student ID</label>
+                            </div>`);
+
+                        const studentFullNameCell = (row.insertCell().innerHTML = `
+                            <div class="form-floating">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="fullNameInput"
+                                    placeholder="text"
+                                    required
+                                    form="add-student-form"
+                                />
+                                <label>Full name</label>
+                            </div>`);
+
+                        const studentDepartmentCell = (row.insertCell().innerHTML = `
+                            <div class="form-floating">
+                                <select
+                                    class="form-select"
+                                    id="departmentSelect"
+                                    required
+                                    form="add-student-form"
+                                >
+                                <option selected disabled>Select Department</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Accounting">Accounting</option>
+                                </select>
+                            <label for="floatingSelect">Department</label>
+                        </div>`);
+
+                        const studentActionCell = (row.insertCell().innerHTML = `
+                        <div class="flex gap-2">
+                            <button class="btn btn-success flex-1" type="submit">Save</button>
+                            <button class="btn btn-danger flex-1" type="button" onclick="cancelStudentForm()" >Cancel</button>
+                        </div>
+                        `);
+                    });
+
+                    // When user click 'save' button to save student data to local storage
+                    addStudentForm.submit(function (e) {
+                        e.preventDefault();
+
+                        // Get student data from form
+                        studentIdInput = $('#studentIdInput').val();
+                        fullNameInput = $('#fullNameInput').val();
+                        departmentSelect = $('#departmentSelect').val();
+
+                        // Set student DTO
+                        const student = {
+                            id: studentIdInput,
+                            fullName: fullNameInput,
+                            department: departmentSelect,
+                        };
+
+                        // Push to array & save to local storage
+                        students.push(student);
+                        localStorage.setItem('students', JSON.stringify(students.sort((a, b) => a.id - b.id)));
+
+                        // Enable to add new student
+                        $('#add-student-btn').prop('disabled', false);
+
+                        // Refresh table
+                        loadStudentDataTable();
+                    });
+                });
+
+                // When user click 'cancel' to add new student
+                function cancelStudentForm(e) {
+                    // Enable to add new student
+                    $('#add-student-btn').prop('disabled', false);
+
+                    // Remove input row
+                    studentTBody.deleteRow(studentTBody.rows.length - 1);
+
+                    // Enable other revelant buttons (Edit/Delete)
+                    document.querySelectorAll('.edit-btn, .delete-btn').forEach((editBtn) => {
+                        editBtn.disabled = false;
+                    });
+                }
+            </script>
+        </main>
+    </body>
+</html>
+
+<!-- Student ID -->
+
+<!-- Fullname -->
+
+<!-- Department -->

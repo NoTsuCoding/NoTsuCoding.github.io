@@ -1,10 +1,7 @@
 <!-- Jumpotron -->
 <div class="p-5 jumpotron" style="background-color: #ffba49">
     <video autoplay loop muted class="size-1">
-        <source
-            src="https://cdn.pixabay.com/video/2022/07/12/123872-729413470_large.mp4"
-            type="video/mp4"
-        />
+        <source src="https://cdn.pixabay.com/video/2022/07/12/123872-729413470_large.mp4" type="video/mp4" />
     </video>
 
     <div class="jumpotron-header">
@@ -14,10 +11,7 @@
 </div>
 
 <!-- Navbar -->
-<nav
-    class="flex flex-row p-2 items-center gap-x-5"
-    style="background-color: #20a39e"
->
+<nav class="flex flex-row p-2 items-center gap-x-5" style="background-color: #20a39e">
     <a class="font-semibold text-xl" href="#">Navbar</a>
     <ul class="flex me-auto items-stretch gap-x-3">
         <!-- Home -->
@@ -33,16 +27,16 @@
         <li class="nav-item">
             <a class="nav-link" href="page02.html">Page 2</a>
         </li>
+
+        <!-- Page 3 -->
+        <li class="nav-item">
+            <a class="nav-link" href="page03.html">Page 3</a>
+        </li>
     </ul>
     <a id="login-info" class="text-white"></a>
     <div class="flex gap-x-2">
         <!-- Sign In -->
-        <button
-            id="sign-in-btn"
-            class="btn btn-warning"
-            data-bs-toggle="modal"
-            data-bs-target="#modalLogin"
-        >
+        <button id="sign-in-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalLogin">
             Sign In
         </button>
 
@@ -57,24 +51,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Login to Your Account.</h1>
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="" id="formSignIn">
                     <!-- Username -->
                     <div class="form-floating mb-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputUsername"
-                            placeholder="admin"
-                            required
-                        />
+                        <input type="text" class="form-control" id="inputUsername" placeholder="admin" required />
                         <label>Username</label>
                     </div>
 
@@ -92,17 +75,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button
-                    type="reset"
-                    class="btn btn-secondary"
-                    form="formSignIn"
-                    data-bs-dismiss="modal"
-                >
-                    close
-                </button>
-                <button type="submit" class="btn btn-primary" form="formSignIn">
-                    Sign In
-                </button>
+                <button type="reset" class="btn btn-secondary" form="formSignIn" data-bs-dismiss="modal">close</button>
+                <button type="submit" class="btn btn-primary" form="formSignIn">Sign In</button>
             </div>
         </div>
     </div>
@@ -111,17 +85,15 @@
 <script>
     $(document).ready(function () {
         // Pages
-        const protectPages = ['/07/page02.html'];
+        const protectPages = ['/07/page03.html'];
 
         // Get local storage data.
-        const localUsername = localStorage.getItem('username') || 'foo';
-        const localPassword = localStorage.getItem('password') || 'bar';
+        const localUsername = localStorage.getItem('username');
+        const localPassword = localStorage.getItem('password');
 
         //  Check are local storage data existed.
-        if (!localUsername || !localPassword) {
-            alert(
-                'Please set username/password in local storage. or use foo/bar as username/password.'
-            );
+        if (!localPassword || !localUsername) {
+            alert('Please set username and password in local storage.');
         }
 
         // Assign element
@@ -156,8 +128,7 @@
 
         // Sign in by compare input with local storage
         function signIn(username, password) {
-            if (localUsername !== username || localPassword !== password)
-                return false;
+            if (localUsername !== username || localPassword !== password) return false;
 
             sessionStorage.setItem('username', username);
             checkSession();

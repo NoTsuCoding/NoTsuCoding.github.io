@@ -26,7 +26,154 @@
         <main
             class="containter-fluid d-md-flex row-gap-3 column-gap-3 flex-wrap justify-content-center pt-5"
         >
-            <p class="text-2xl font-bold text-white">Page01</p>
+            <!-- Card -->
+            <div class="card" style="width: 50rem">
+                <img
+                    src="https://i.pinimg.com/736x/a5/35/8a/a5358a5f47f42bb135354a1266ac33c8.jpg"
+                    class="object-cover h-80 object-top"
+                    alt="..."
+                />
+                <!-- <img
+                    src="https://newsimg.koreatimes.co.kr/2024/11/01/96d9e0fa-fdcb-465c-b13f-128ed0c5152a.jpg"
+                    class="card-img-top"
+                    alt="..."
+                /> -->
+                <div class="card-body">
+                    <h5 class="card-title text-xl font-semibold">
+                        Create New Student Form
+                    </h5>
+                    <form action="" id="create-student-form" class="mb-5">
+                        <!-- Student ID -->
+                        <div class="form-floating mb-3">
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="studentIdInput"
+                                min="1000"
+                                max="9999"
+                                placeholder=""
+                                required
+                            />
+                            <label>Student ID</label>
+                        </div>
+
+                        <!-- Fullname -->
+                        <div class="form-floating mb-3">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="fullNameInput"
+                                placeholder="text"
+                                required
+                            />
+                            <label>Full name</label>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="form-floating mb-3">
+                            <select
+                                class="form-select"
+                                id="departmentSelect"
+                                required
+                            >
+                                <option selected disabled>
+                                    Select Department
+                                </option>
+                                <option value="Information Technology">
+                                    Information Technology
+                                </option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Accounting">Accounting</option>
+                            </select>
+                            <label for="floatingSelect">Department</label>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button
+                                type="submit"
+                                class="btn btn-primary flex-1"
+                            >
+                                Submit
+                            </button>
+                            <button
+                                type="reset"
+                                class="btn btn-outline-primary flex-1"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="">
+                        <table
+                            class="table table-success table-striped table-hover table-bordered w-full"
+                            id="students-table"
+                        >
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Student ID</th>
+                                    <th style="width: 50%">Full Name</th>
+                                    <th class="text-center">Department</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+
+            <script>
+                $(document).ready(function () {
+                    const students = JSON.parse(
+                        localStorage.getItem('students') ?? '[]'
+                    ).sort((a, b) => a.id - b.id);
+
+                    setStudentsIntoTable();
+
+                    function clearStudentForm() {
+                        $('#studentIdInput').val('');
+                        $('#fullNameInput').val('');
+                        $('#departmentSelect').selectedIndex = 0;
+                    }
+
+                    function setStudentsIntoTable() {
+                        $('#students-table > tbody > tr').remove();
+                        for (const student of students) {
+                            $('#students-table > tbody').append(
+                                `<tr>
+                                    <th class="text-center">${student.id}</th>
+                                    <td>${student.fullName}</td>
+                                    <td class="text-center">${student.department}</td>
+                                </tr>`
+                            );
+                        }
+                    }
+
+                    $('#create-student-form').submit(function (e) {
+                        e.preventDefault();
+                        studentIdInput = $('#studentIdInput').val();
+                        fullNameInput = $('#fullNameInput').val();
+                        departmentSelect = $('#departmentSelect').val();
+
+                        const student = {
+                            id: studentIdInput,
+                            fullName: fullNameInput,
+                            department: departmentSelect,
+                        };
+
+                        students.push(student);
+                        setStudentsIntoTable();
+
+                        localStorage.setItem(
+                            'students',
+                            JSON.stringify(students)
+                        );
+
+                        clearStudentForm();
+                    });
+                });
+            </script>
         </main>
     </body>
 </html>
